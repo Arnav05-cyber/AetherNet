@@ -1,0 +1,18 @@
+package com.aether.server;
+
+import com.aether.common.PacketDecoder;
+import com.aether.common.PacketEncoder;
+import io.netty.channel.ChannelInitializer;
+
+import io.netty.channel.socket.SocketChannel;
+
+public class ServerInitializer extends ChannelInitializer<SocketChannel> {
+
+    @Override
+    protected void initChannel(SocketChannel ch) throws Exception {
+        ch.pipeline().addLast(new PacketDecoder());
+        ch.pipeline().addLast(new PacketEncoder());
+        ch.pipeline().addLast(new ServerHandler());
+    }
+
+}
