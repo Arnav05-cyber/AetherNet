@@ -17,15 +17,21 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     public void channelActive(ChannelHandlerContext ctx){
         if(ctx.channel().isActive()){
-            System.out.println("Client connected: "+ctx.channel().remoteAddress());
-            WelcomePacket welcomePacket = new WelcomePacket("Welcome to the Aether Server!");
+            String uniqueId = ctx.channel().id().asLongText();
             channels.add(ctx.channel());
-            System.out.println("New Player joined: "+ctx.channel().remoteAddress()+". Total players: "+channels.size());
-            ctx.writeAndFlush(welcomePacket);
+            WelcomePacket welcomePacket1 = new WelcomePacket("Welcome to the Aether Server!", uniqueId);
+            ctx.writeAndFlush(welcomePacket1);
+            System.out.println("Sent welcome packet to client: "+ctx.channel().remoteAddress());
         }
     }
 
-
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx){
+        String uniqueId = ctx.channel().id().asLongText();
+        channels.remove(ctx.channel());
+        gameWorld.removePlayer(uniqueId);
+        System.out.println("Client disconnected: "+ctx.channel().remoteAddress());
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Packet packet) throws Exception {

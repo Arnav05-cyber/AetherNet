@@ -7,6 +7,13 @@ import java.nio.charset.StandardCharsets;
 public class WelcomePacket implements Packet {
 
      private String message;
+     private String assignedId;
+     public WelcomePacket(String message, String assignedId) {
+          this.message = message;
+          this.assignedId = assignedId;
+     }
+
+
 
      public WelcomePacket() {
      }
@@ -20,6 +27,10 @@ public class WelcomePacket implements Packet {
           byte[] messageBytes = message.getBytes(StandardCharsets.UTF_8);
           buf.writeInt(messageBytes.length);
           buf.writeBytes(messageBytes);
+
+          byte[] assignedIdBytes = assignedId.getBytes(StandardCharsets.UTF_8);
+          buf.writeInt(assignedIdBytes.length);
+          buf.writeBytes(assignedIdBytes);
      }
 
      @Override
@@ -28,6 +39,10 @@ public class WelcomePacket implements Packet {
           byte[] messageBytes = new byte[length];
           buf.readBytes(messageBytes);
           this.message = new String(messageBytes, StandardCharsets.UTF_8);
+
+          byte[] assignedIdBytes = new byte[length];
+          buf.readBytes(assignedIdBytes);
+          this.assignedId = new String(assignedIdBytes, StandardCharsets.UTF_8);
      }
 
      @Override
@@ -38,7 +53,7 @@ public class WelcomePacket implements Packet {
      public String getMessage() {
           return message;
      }
-
+     public String getAssignedId() { return assignedId; }
 
 
 }

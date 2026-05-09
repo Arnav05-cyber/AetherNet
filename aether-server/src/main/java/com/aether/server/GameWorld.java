@@ -20,4 +20,9 @@ public class GameWorld {
         }
     }
 
+    public void removePlayer(String playerId){
+        players.remove(playerId);
+        System.out.println("Removed player "+playerId+" from game world");
+    }
+
 }

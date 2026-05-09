@@ -8,8 +8,10 @@ import java.io.IOException;
 public class PlayerMovePacket implements Packet{
 
     private float x,y;
+    private String playerId;
 
-    public PlayerMovePacket(float x, float y) {
+    public PlayerMovePacket(float x, float y, String playerId) {
+        this.playerId = playerId;
         this.x = x;
         this.y = y;
     }
@@ -22,12 +24,19 @@ public class PlayerMovePacket implements Packet{
     public void write(ByteBuf buf){
         buf.writeFloat(x);
         buf.writeFloat(y);
+        byte[] playerIdBytes = playerId.getBytes();
+        buf.writeInt(playerIdBytes.length);
+        buf.writeBytes(playerIdBytes);
     }
 
     @Override
     public void read(ByteBuf buf){
         this.x = buf.readFloat();
         this.y = buf.readFloat();
+
+        byte[] playerIdBytes = new byte[buf.readInt()];
+        buf.readBytes(playerIdBytes);
+        this.playerId = new String(playerIdBytes);
     }
 
     @Override
@@ -37,5 +46,6 @@ public class PlayerMovePacket implements Packet{
 
     public float getX() {return x;}
     public float getY() {return y;}
+    public String getPlayerId() {return playerId;}
 
 }

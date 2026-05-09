@@ -22,7 +22,7 @@ public class AetherClient {
             System.out.println("Aether Client is connecting to " + host + ":" + port + "...");
             ChannelFuture future = bootstrap.connect(host, port).sync();
             System.out.println("Aether Client connected to " + host + ":" + port + ".");
-            PlayerMovePacket  packet = new PlayerMovePacket(10.4f, 29.0f);
+            PlayerMovePacket  packet = new PlayerMovePacket(10.4f, 29.0f, "2");
             future.channel().writeAndFlush(packet);
             future.channel().closeFuture().sync();
         } finally {
