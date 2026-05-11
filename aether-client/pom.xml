@@ -12,16 +12,21 @@
     <artifactId>aether-client</artifactId>
 
     <dependencies>
+        <!-- Project Modules -->
         <dependency>
             <groupId>com.aether</groupId>
             <artifactId>aether-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- Networking -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.100.Final</version>
         </dependency>
+
+        <!-- LWJGL Core -->
         <dependency>
             <groupId>org.lwjgl</groupId>
             <artifactId>lwjgl</artifactId>
@@ -29,13 +34,35 @@
         </dependency>
         <dependency>
             <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl</artifactId>
+            <version>3.3.3</version>
+            <classifier>natives-windows</classifier> <!-- ADDED -->
+        </dependency>
+
+        <!-- LWJGL GLFW -->
+        <dependency>
+            <groupId>org.lwjgl</groupId>
             <artifactId>lwjgl-glfw</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-glfw</artifactId>
+            <version>3.3.3</version>
+            <classifier>natives-windows</classifier> <!-- ADDED -->
+        </dependency>
+
+        <!-- LWJGL OpenGL -->
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-opengl</artifactId>
             <version>3.3.3</version>
         </dependency>
         <dependency>
             <groupId>org.lwjgl</groupId>
             <artifactId>lwjgl-opengl</artifactId>
             <version>3.3.3</version>
+            <classifier>natives-windows</classifier> <!-- ADDED -->
         </dependency>
     </dependencies>
 </project>
