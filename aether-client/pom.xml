@@ -64,5 +64,11 @@
             <version>3.3.3</version>
             <classifier>natives-windows</classifier> <!-- ADDED -->
         </dependency>
+
+        <dependency>
+            <groupId>org.joml</groupId>
+            <artifactId>joml</artifactId>
+            <version>1.10.5</version>
+        </dependency>
     </dependencies>
 </project>
